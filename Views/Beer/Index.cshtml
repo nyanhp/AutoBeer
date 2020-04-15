@@ -1,0 +1,76 @@
+﻿@model IEnumerable<AutoBeer.Data.Classes.Beer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BitternessUnits)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OriginalGravityPlato)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brewed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bottled)
+            </th>
+            <th>Supply</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BitternessUnits)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OriginalGravityPlato)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brewed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bottled)
+            </td>
+            <td>
+                <meter value="@item.RemainingBottles" max="@item.TotalBottles" optimum="@(0.90 * item.TotalBottles)" low="@(item.TotalBottles / 5)" high="@(0.95 * item.TotalBottles)">@item.RemainingBottles</meter><br />
+                @item.RemainingBottles bottles remaining.
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
