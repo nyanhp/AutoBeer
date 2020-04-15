@@ -70,7 +70,7 @@ namespace AutoBeer.Api
                 BeerName = Beer,
                 Timestamp = timeStamp,
                 SpecificGravity = SG,
-                Temperature = Temp,
+                TemperatureFahrenheit = Temp,
                 TiltColor = Color,
                 Comment = Comment
             };

@@ -1,0 +1,114 @@
+﻿@model AutoBeer.Data.Classes.Beer
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Beer</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Style)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Style)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Brewed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Brewed)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Bottled)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Bottled)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalBottles)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TotalBottles)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RemainingBottles)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RemainingBottles)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BatchSizeLiters)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BatchSizeLiters)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BitternessUnits)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BitternessUnits)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OriginalGravityPlato)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OriginalGravityPlato)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OriginalGravity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OriginalGravity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FinalGravity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FinalGravity)
+        </dd>
+        @if (Model.AlcoholMeasured != 0.00)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.AlcoholMeasured)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.AlcoholMeasured)
+            </dd>
+        }
+        @if (Model.Alcohol != 0.00)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Alcohol)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Alcohol)
+            </dd>
+        }
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
