@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutoBeer.Web</name>
+    </assembly>
+    <members>
+        <member name="T:AutoBeer.Api.BeerController">
+            <summary>
+            This API controller is responsible for serving and storing Beer
+            </summary>
+        </member>
+        <member name="M:AutoBeer.Api.BeerController.Get">
+            <summary>
+            Get all the beer!
+            </summary>
+            <returns>An IEnumerable of Beer</returns>
+            <response code="200">All good</response>
+            <response code="403">Indicates that you did not use an API key in the header X-ApiKey or that the key did not match what was configured in your appsettings</response>
+        </member>
+        <member name="M:AutoBeer.Api.BeerController.Get(System.Int32)">
+            <summary>
+            Get one beer
+            </summary>
+            <param name="id">The id of the beer</param>
+            <returns>The desired beer</returns>
+            <response code="200">All good</response>
+            <response code="403">Indicates that you did not use an API key in the header X-ApiKey or that the key did not match what was configured in your appsettings</response>
+        </member>
+        <member name="M:AutoBeer.Api.BeerController.Post(AutoBeer.Data.Classes.Beer)">
+            <summary>
+            Add a new beer to the cellar
+            </summary>
+            <param name="beer">This method expects a Beer object in the POST body</param>
+            <remarks>Measurements is optional</remarks>
+            <response code="200">All good</response>
+            <response code="403">Indicates that you did not use an API key in the header X-ApiKey or that the key did not match what was configured in your appsettings</response>
+        </member>
+        <member name="M:AutoBeer.Api.BeerController.Put(System.Int32,AutoBeer.Data.Classes.Beer)">
+            <summary>
+            Update a given beer, e.g. lowering the number of bottles remaining
+            </summary>
+            <param name="id">The id of the beer to update</param>
+            <param name="beer">The Beer object to store instead of Id</param>
+            <remarks>Measurements is optional</remarks>
+            <response code="200">All good</response>
+            <response code="403">Indicates that you did not use an API key in the header X-ApiKey or that the key did not match what was configured in your appsettings</response>
+        </member>
+        <member name="M:AutoBeer.Api.BeerController.Delete(System.Int32)">
+            <summary>
+            Delete a beer from the cellar
+            </summary>
+            <param name="id">The id of the beer to delete</param>
+            <response code="200">All good</response>
+            <response code="403">Indicates that you did not use an API key in the header X-ApiKey or that the key did not match what was configured in your appsettings</response>
+        </member>
+        <member name="T:AutoBeer.Api.BeerMeasurementController">
+            <summary>
+            The BeerMeasurementController accepts new measurements for existing Beers
+            </summary>
+        </member>
+        <member name="M:AutoBeer.Api.BeerMeasurementController.#ctor(AutoBeer.Data.Services.IBreweryData,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            The constuctor uses the IoC pattern
+            </summary>
+            <param name="db">The database context</param>
+            <param name="configuration">The configuration context</param>
+        </member>
+        <member name="M:AutoBeer.Api.BeerMeasurementController.Get(System.Int32)">
+            <summary>
+            This methods is used to retrieve all available measurements
+            </summary>
+            <returns>IEnub</returns>
+        </member>
+        <member name="M:AutoBeer.Api.BeerMeasurementController.Post(System.Double,System.Double,System.Double,System.String,System.String,System.String)">
+            <summary>
+            This methods posts new measurements
+            </summary>
+            <param name="Timepoint"></param>
+            <param name="SG"></param>
+            <param name="Temp"></param>
+            <param name="Color"></param>
+            <param name="Beer"></param>
+            <param name="Comment"></param>
+        </member>
+    </members>
+</doc>

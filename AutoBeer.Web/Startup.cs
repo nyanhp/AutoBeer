@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace AutoBeer
 {
@@ -32,6 +34,22 @@ namespace AutoBeer
             services.AddSession();
             services.AddDistributedMemoryCache();
             services.AddMvc().AddControllersAsServices();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Beer makes me SWAGGER",
+                    Version = "v1",
+                    Description = "This API is currently in development and maybe will one day see the light of day."
+                    // You can also set Description, Contact, License, TOS...
+                });
+
+                // Configure Swagger to use the xml documentation file
+                var xmlFile = $"{AppDomain.CurrentDomain.BaseDirectory}/AutoBeer.Web.xml";
+                c.IncludeXmlComments(xmlFile);
+                c.AddSecurityDefinition("X-ApiKey", new OpenApiSecurityScheme { In = ParameterLocation.Header, Description = "Plaintext API key in X-ApiKey header." });
+                //c.AddSecurityRequirement(new OpenApiSecurityRequirement { })
+            });
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -57,6 +75,11 @@ namespace AutoBeer
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Beer makes me SWAGGER");
+            });
             app.UseRouting();
 
             app.UseAuthorization();

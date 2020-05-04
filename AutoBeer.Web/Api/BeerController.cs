@@ -11,6 +11,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace AutoBeer.Api
 {
+    /// <summary>
+    /// This API controller is responsible for serving and storing Beer
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class BeerController : ControllerBase
@@ -39,6 +42,12 @@ namespace AutoBeer.Api
         }
 
         // GET: api/Beer
+        /// <summary>
+        /// Get all the beer!
+        /// </summary>
+        /// <returns>An IEnumerable of Beer</returns>
+        /// <response code="200">All good</response>
+        /// <response code="403">Indicates that you did not use an API key in the header X-ApiKey or that the key did not match what was configured in your appsettings</response>
         [HttpGet]
         public IEnumerable<Beer> Get()
         {
@@ -46,6 +55,13 @@ namespace AutoBeer.Api
         }
 
         // GET: api/Beer/5
+        /// <summary>
+        /// Get one beer
+        /// </summary>
+        /// <param name="id">The id of the beer</param>
+        /// <returns>The desired beer</returns>
+        /// <response code="200">All good</response>
+        /// <response code="403">Indicates that you did not use an API key in the header X-ApiKey or that the key did not match what was configured in your appsettings</response>
         [HttpGet("{id}")]
         public Beer Get(int id)
         {
@@ -53,6 +69,13 @@ namespace AutoBeer.Api
         }
 
         // POST: api/Beer
+        /// <summary>
+        /// Add a new beer to the cellar
+        /// </summary>
+        /// <param name="beer">This method expects a Beer object in the POST body</param>
+        /// <remarks>Measurements is optional</remarks>
+        /// <response code="200">All good</response>
+        /// <response code="403">Indicates that you did not use an API key in the header X-ApiKey or that the key did not match what was configured in your appsettings</response>
         [HttpPost]
         public void Post([FromBody] Beer beer)
         {
@@ -67,6 +90,14 @@ namespace AutoBeer.Api
         }
 
         // PUT: api/Beer/5
+        /// <summary>
+        /// Update a given beer, e.g. lowering the number of bottles remaining
+        /// </summary>
+        /// <param name="id">The id of the beer to update</param>
+        /// <param name="beer">The Beer object to store instead of Id</param>
+        /// <remarks>Measurements is optional</remarks>
+        /// <response code="200">All good</response>
+        /// <response code="403">Indicates that you did not use an API key in the header X-ApiKey or that the key did not match what was configured in your appsettings</response>
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Beer beer)
         {
@@ -81,6 +112,12 @@ namespace AutoBeer.Api
         }
 
         // DELETE: api/ApiWithActions/5
+        /// <summary>
+        /// Delete a beer from the cellar
+        /// </summary>
+        /// <param name="id">The id of the beer to delete</param>
+        /// <response code="200">All good</response>
+        /// <response code="403">Indicates that you did not use an API key in the header X-ApiKey or that the key did not match what was configured in your appsettings</response>
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
