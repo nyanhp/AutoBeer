@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoBeer.Data.Classes;
+using AutoBeer.Data.Enums;
 using AutoBeer.Data.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -85,7 +86,7 @@ namespace AutoBeer.Api
         /// <param name="Comment"></param>
         // POST: api/BeerMeasurement
         [HttpPost]
-        public void Post(double Timepoint, double SG, double Temp, string Color, string Beer, string Comment)
+        public void Post(double Timepoint, double SG, double Temp, TiltColor Color, string Beer, string Comment)
         {
             if (IsAuthenticated(true))
             {

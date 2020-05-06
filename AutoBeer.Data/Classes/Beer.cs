@@ -29,7 +29,7 @@ namespace AutoBeer.Data.Classes
         public UInt16 BitternessUnits { get; set; }
         [DisplayName("EBC")]
         public UInt16 Color { get; set; }
-        [DisplayName("Gravity °P")]
+        [DisplayName("Gravity °P measured")]
         [DisplayFormat(DataFormatString = "{0:0.00}")]
         public double OriginalGravityPlato
         {
@@ -38,12 +38,54 @@ namespace AutoBeer.Data.Classes
                 return (668.72 * OriginalGravity) - 463.37 - (205.347 * Math.Pow(OriginalGravity, 2));
             }
         }
+        [DisplayName("Gravity °P")]
+        [DisplayFormat(DataFormatString = "{0:0.00}")]
+        public double OriginalGravityPlatoMeasured
+        {
+            get
+            {
+                return (668.72 * OriginalGravityMeasured) - 463.37 - (205.347 * Math.Pow(OriginalGravityMeasured, 2));
+            }
+        }
+
         [DisplayName("Specific gravity (SG)")]
         [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double OriginalGravity { get; set; }
         [DisplayName("Final gravity (SG)")]
         [DisplayFormat(DataFormatString = "{0:0.000}")]
         public double FinalGravity { get; set; }
+
+
+        [DisplayName("Specific gravity (SG) measured")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
+        public double OriginalGravityMeasured
+        {
+            get
+            {
+                if (Measurements.Count > 0)
+                {
+                    Measurements.Sort();
+                    return Measurements.First().SpecificGravity;
+                }
+
+                return OriginalGravity;
+            }
+        }
+        [DisplayName("Final gravity (SG) measured")]
+        [DisplayFormat(DataFormatString = "{0:0.000}")]
+        public double FinalGravityMeasured
+        {
+            get
+            {
+                if (Measurements.Count > 0)
+                {
+                    Measurements.Sort();
+                    return Measurements.Last().SpecificGravity;
+                }
+
+                return FinalGravity;
+            }
+        }
 
         public List<BeerMeasurementInfo> Measurements { get; set; }
         [DisplayName("ABV % (measured)")]
@@ -54,10 +96,7 @@ namespace AutoBeer.Data.Classes
             {
                 if (Measurements.Count > 0)
                 {
-                    Measurements.Sort();
-                    var first = Measurements.First();
-                    var last = Measurements.Last();
-                    return 131 * (first.SpecificGravity - last.SpecificGravity);
+                    return 131 * (OriginalGravityMeasured - FinalGravityMeasured);
                 }
 
                 return 131 * (OriginalGravity - FinalGravity);

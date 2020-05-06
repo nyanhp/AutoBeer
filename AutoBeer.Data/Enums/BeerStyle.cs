@@ -95,6 +95,8 @@ namespace AutoBeer.Data.Enums
         [Display(Name = "Weissbier")]
         Weissbier,
         [Display(Name = "Weizenbock")]
-        Weizenbock
+        Weizenbock,
+        [Display(Name = "Malt beer")]
+        MaltBeer
     }
 }

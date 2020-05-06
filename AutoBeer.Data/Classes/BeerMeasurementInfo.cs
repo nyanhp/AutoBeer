@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoBeer.Data.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -11,7 +12,7 @@ namespace AutoBeer.Data.Classes
     public class BeerMeasurementInfo : IEquatable<BeerMeasurementInfo>, IComparable<BeerMeasurementInfo>
     {
         [DisplayName("Tilt color")]
-        public string TiltColor { get; set; }
+        public TiltColor TiltColor { get; set; }
         [DisplayName("Beer name")]
         public string BeerName { get; set; }
         [DisplayName("Time stamp")]

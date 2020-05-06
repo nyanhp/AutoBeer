@@ -7,15 +7,16 @@ namespace AutoBeer.Data.Services
     public class InMemoryBreweryData : IBreweryData
     {
         List<Beer> _beers;
-        public InMemoryBreweryData()
-        {
-            _beers = new List<Beer>()
+        public InMemoryBreweryData() => _beers = new List<Beer>()
                 {
                     new Beer {Id = 0, Name = "Sierra Nevada Pale Ale", Style = Enums.BeerStyle.PaleAle, BitternessUnits = 35, Color = 25, OriginalGravity = 1.055, FinalGravity = 1.009, BatchSizeLiters = 20.4,Bottled = new System.DateTime(2020, 4,10), Brewed = new System.DateTime(2020,4,4),TotalBottles = 40, RemainingBottles = 37  },
                     new Beer {Id = 1, Name = "Amber", Style = Enums.BeerStyle.AmberAle, BitternessUnits = 20, Color = 20, OriginalGravity = 1.048, FinalGravity = 1.014, BatchSizeLiters = 20.4,Bottled = new System.DateTime(2018, 12,1), Brewed = new System.DateTime(2018,11,21),TotalBottles = 40, RemainingBottles = 0},
-                    new Beer {Id = 2, Name = "Premium Pils", Style = Enums.BeerStyle.Pilsener, BitternessUnits = 35, Color = 7, OriginalGravity = 1.048, FinalGravity = 1.014, BatchSizeLiters = 20.4,Bottled = new System.DateTime(2019, 6,7), Brewed = new System.DateTime(2019,5,31),TotalBottles = 40, RemainingBottles = 0},
+                    new Beer {Id = 2, Name = "Premium Pils", Style = Enums.BeerStyle.Pilsener, Measurements = new List<BeerMeasurementInfo>(){ 
+                        new BeerMeasurementInfo{ BeerName = "Premium Pils", SpecificGravity = 1.048, TemperatureFahrenheit = 50, TiltColor = Enums.TiltColor.Black,Timestamp = new System.DateTime(2018,11,21) },
+                            new BeerMeasurementInfo{ BeerName = "Premium Pils", SpecificGravity = 1.014, TemperatureFahrenheit = 50, TiltColor = Enums.TiltColor.Black,Timestamp = new System.DateTime(2018,12,1) }
+                    }, BitternessUnits = 35, Color = 7, OriginalGravity = 1.048, FinalGravity = 1.014, BatchSizeLiters = 20.4,Bottled = new System.DateTime(2019, 6,7), Brewed = new System.DateTime(2019,5,31),TotalBottles = 40, RemainingBottles = 0},
+                    new Beer {Id = 3, Name = "Malzbier", Style = Enums.BeerStyle.MaltBeer, BitternessUnits = 25, Color = 45, BatchSizeLiters = 20.0,Bottled = new System.DateTime(2020, 5,7), Brewed = new System.DateTime(202,5,6),TotalBottles = 40, RemainingBottles = 40},
                 };
-        }
 
         public void DeleteBeer(int id)
         {

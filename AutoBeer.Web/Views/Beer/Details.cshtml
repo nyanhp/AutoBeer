@@ -71,6 +71,24 @@
             @Html.DisplayFor(model => model.Color)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OriginalGravityPlatoMeasured)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OriginalGravityPlatoMeasured)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OriginalGravityMeasured)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OriginalGravityMeasured)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FinalGravityMeasured)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FinalGravityMeasured)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.OriginalGravityPlato)
         </dt>
         <dd class="col-sm-10">
@@ -90,23 +108,50 @@
         </dd>
         @if (Model.AlcoholMeasured != 0.00)
         {
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.AlcoholMeasured)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.AlcoholMeasured)
-            </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AlcoholMeasured)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AlcoholMeasured)
+        </dd>
         }
         @if (Model.Alcohol != 0.00)
         {
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Alcohol)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Alcohol)
-            </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Alcohol)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Alcohol)
+        </dd>
         }
     </dl>
+
+    @if (Model.Measurements != null)
+        {
+    <table>
+        <tr>
+            <th>@Html.DisplayNameFor(measure => measure.Measurements.First().BeerName)</th>
+            <th>@Html.DisplayNameFor(measure => measure.Measurements.First().Timestamp)</th>
+            <th>@Html.DisplayNameFor(measure => measure.Measurements.First().TiltColor)</th>
+            <th>@Html.DisplayNameFor(measure => measure.Measurements.First().SpecificGravity)</th>
+            <th>@Html.DisplayNameFor(measure => measure.Measurements.First().TemperatureFahrenheit)</th>
+            <th>@Html.DisplayNameFor(measure => measure.Measurements.First().TemperatureCelsius)</th>
+            <th>@Html.DisplayNameFor(measure => measure.Measurements.First().Comment)</th>
+        </tr>
+        @foreach (var measure in Model.Measurements)
+            {
+    <tr>
+        <td>@Html.DisplayFor(mea => measure.BeerName)</td>
+        <td>@Html.DisplayFor(mea => measure.Timestamp)</td>
+        <td>@Html.DisplayFor(mea => measure.TiltColor)</td>
+        <td>@Html.DisplayFor(mea => measure.SpecificGravity)</td>
+        <td>@Html.DisplayFor(mea => measure.TemperatureFahrenheit)</td>
+        <td>@Html.DisplayFor(mea => measure.TemperatureCelsius)</td>
+        <td>@Html.DisplayFor(mea => measure.Comment)</td>
+    </tr>
+            }
+    </table>
+        }
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
