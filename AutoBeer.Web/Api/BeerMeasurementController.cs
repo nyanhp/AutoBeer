@@ -50,7 +50,7 @@ namespace AutoBeer.Api
         [HttpGet("api/{apikey?}/[controller]/{beerId}/{id}")]
         public BeerMeasurementInfo Get(string apikey, int beerId, long id)
         {
-            return _brewDb.GetMeasurement(beerId, id);
+            return _brewDb.GetMeasurement(id);
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace AutoBeer.Api
         {
             if (!_configuration.GetValue(typeof(string), "ApiKey").ToString().Equals(apikey)) Response.StatusCode = 403;
 
-            _brewDb.DeleteMeasurement(beerId, id);
+            _brewDb.DeleteMeasurement(id);
         }
     }
 }

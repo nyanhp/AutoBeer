@@ -56,7 +56,9 @@ namespace AutoBeer
         {
             // Register your own things directly with Autofac, like:
             //builder.RegisterControllers(typeof(Program).Assembly);
-            builder.RegisterType<InMemoryBreweryData>().As<IBreweryData>().SingleInstance();
+            //builder.RegisterType<InMemoryBreweryData>().As<IBreweryData>().SingleInstance();
+            builder.RegisterType<SqlBrewData>().As<IBreweryData>().InstancePerLifetimeScope();
+            builder.RegisterType<BeerDbContext>().InstancePerLifetimeScope();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

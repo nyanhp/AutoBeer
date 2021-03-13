@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,7 +35,9 @@ namespace AutoBeer.Data.Classes
         }
         [DisplayName("Comment")]
         public string Comment { get; set; }
+        public int BeerId { get; set; }
 
+        [Key]
         public long Id
         {
             get { return Timestamp.Ticks; }

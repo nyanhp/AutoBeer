@@ -7,6 +7,7 @@ namespace AutoBeer.Data.Services
     public class InMemoryBreweryData : IBreweryData
     {
         List<Beer> _beers;
+        List<BeerMeasurementInfo> _measurements;
         public InMemoryBreweryData()
         {
             _beers = new List<Beer>()
@@ -42,45 +43,42 @@ namespace AutoBeer.Data.Services
             _beers.Add(beer);
         }
 
-        public void UpdateBeer(int id, Beer beer)
+        public void UpdateBeer(Beer beer)
         {
-            var beerToUpdate = GetBeer(id);
+            var beerToUpdate = GetBeer(beer.Id);
             if (null == beerToUpdate) return;
-            DeleteBeer(id);
-            beer.Id = id;
+            DeleteBeer(beer.Id);
             AddBeer(beer);
         }
 
         public IEnumerable<BeerMeasurementInfo> GetMeasurements(int beerId)
         {
-            return GetBeer(beerId).Measurements;
+            return new List<BeerMeasurementInfo>();
+            //return GetBeer(beerId).Measurements;
         }
 
         public void AddMeasurement(int beerId, BeerMeasurementInfo info)
         {
-            GetBeer(beerId).Measurements.Add(info);
+            //GetBeer(beerId).Measurements.Add(info);
         }
 
-        public void UpdateMeasurement(int beerId, long measurementId, BeerMeasurementInfo info)
+        public void UpdateMeasurement(BeerMeasurementInfo info)
         {
-            var beerToUpdate = GetBeer(beerId);
-            if (null == beerToUpdate) return;
-
-            var measurementToUpdate = GetMeasurement(beerId, measurementId);
+            var measurementToUpdate = GetMeasurement(info.Id);
             if (null == measurementToUpdate) return;
-            DeleteMeasurement(beerId, measurementId);
-            AddMeasurement(beerId, info);
+            DeleteMeasurement(measurementToUpdate.Id);
+            AddMeasurement(info.BeerId, info);
         }
 
-        public void DeleteMeasurement(int beerId, long measurementId)
+        public void DeleteMeasurement(long measurementId)
         {
-            var info = GetMeasurement(beerId, measurementId);
-            GetBeer(beerId)?.Measurements.Remove(info);
+            var info = GetMeasurement(measurementId);
+            _measurements.Remove(info);
         }
 
-        public BeerMeasurementInfo GetMeasurement(int beerId, long measurementId)
+        public BeerMeasurementInfo GetMeasurement(long measurementId)
         {
-            return GetBeer(beerId).Measurements.FirstOrDefault(measure => measure.Id == measurementId);
+            return _measurements.FirstOrDefault(measure => measure.Id == measurementId);
         }
 
         public Beer GetBeer(string name)

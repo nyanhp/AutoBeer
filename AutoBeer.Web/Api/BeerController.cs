@@ -82,7 +82,7 @@ namespace AutoBeer.Api
         public void Put(string apikey, int id, [FromBody] Beer beer)
         {
             if (!_configuration.GetValue(typeof(string), "ApiKey").ToString().Equals(apikey)) Response.StatusCode = 403;
-            _brewDb.UpdateBeer(id, beer);
+            _brewDb.UpdateBeer(beer);
         }
 
         // DELETE: api/ApiWithActions/5

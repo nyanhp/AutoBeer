@@ -16,18 +16,18 @@ namespace AutoBeer.Data.Services
         Beer GetBeer(string name);
 
         IEnumerable<BeerMeasurementInfo> GetMeasurements(int beerId);
-        BeerMeasurementInfo GetMeasurement(int beerId, long measurementId);
+        BeerMeasurementInfo GetMeasurement(long measurementId);
 
         //Add
         void AddBeer(Beer beer);
         void AddMeasurement(int beerId, BeerMeasurementInfo info);
 
         //Update
-        void UpdateBeer(int id, Beer beer);
-        void UpdateMeasurement(int beerId, long measurementId, BeerMeasurementInfo info);
+        void UpdateBeer(Beer beer);
+        void UpdateMeasurement(BeerMeasurementInfo info);
 
         //Delete
         void DeleteBeer(int id);
-        void DeleteMeasurement(int beerId, long measurementId);
+        void DeleteMeasurement(long measurementId);
     }
 }
