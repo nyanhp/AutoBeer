@@ -47,7 +47,7 @@ namespace AutoBeer
                 // Configure Swagger to use the xml documentation file
                 var xmlFile = $"{AppDomain.CurrentDomain.BaseDirectory}/AutoBeer.Web.xml";
                 c.IncludeXmlComments(xmlFile);
-                c.AddSecurityDefinition("X-ApiKey", new OpenApiSecurityScheme { In = ParameterLocation.Header, Description = "Plaintext API key in X-ApiKey header." });
+                //c.AddSecurityDefinition("X-ApiKey", new OpenApiSecurityScheme { In = ParameterLocation.Header, Description = "Plaintext API key in X-ApiKey header." });
                 //c.AddSecurityRequirement(new OpenApiSecurityRequirement { })
             });
         }
@@ -87,9 +87,7 @@ namespace AutoBeer
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }

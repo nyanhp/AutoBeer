@@ -14,7 +14,6 @@ namespace AutoBeer.Api
     /// <summary>
     /// This API controller is responsible for serving and storing Beer
     /// </summary>
-    [Route("api/[controller]")]
     [ApiController]
     public class BeerController : ControllerBase
     {
@@ -26,21 +25,6 @@ namespace AutoBeer.Api
             _brewDb = db;
         }
 
-        private bool IsAuthenticated()
-        {
-            if (HttpContext.Session.TryGetValue("ApiKey", out var apiKey))
-            {
-                return _configuration.GetValue(typeof(string), "ApiKey").Equals(Encoding.Unicode.GetString(apiKey));
-            }
-
-            if (HttpContext.Request.Headers.TryGetValue("X-ApiKey", out var apiKeyHeader))
-            {
-                return _configuration.GetValue(typeof(string), "ApiKey").Equals(apiKeyHeader.First());
-            }
-
-            return false;
-        }
-
         // GET: api/Beer
         /// <summary>
         /// Get all the beer!
@@ -48,8 +32,9 @@ namespace AutoBeer.Api
         /// <returns>An IEnumerable of Beer</returns>
         /// <response code="200">All good</response>
         /// <response code="403">Indicates that you did not use an API key in the header X-ApiKey or that the key did not match what was configured in your appsettings</response>
-        [HttpGet]
-        public IEnumerable<Beer> Get()
+        [HttpGet("api/[controller]")]
+        [HttpGet("api/{apikey?}/[controller]")]
+        public IEnumerable<Beer> Get(string apikey)
         {
             return _brewDb.GetAllBeers();
         }
@@ -62,8 +47,9 @@ namespace AutoBeer.Api
         /// <returns>The desired beer</returns>
         /// <response code="200">All good</response>
         /// <response code="403">Indicates that you did not use an API key in the header X-ApiKey or that the key did not match what was configured in your appsettings</response>
-        [HttpGet("{id}")]
-        public Beer Get(int id)
+        [HttpGet("api/[controller]/{id}")]
+        [HttpGet("api/{apikey?}/[controller]/{id}")]
+        public Beer Get(string apikey, int id)
         {
             return _brewDb.GetBeer(id);
         }
@@ -76,17 +62,11 @@ namespace AutoBeer.Api
         /// <remarks>Measurements is optional</remarks>
         /// <response code="200">All good</response>
         /// <response code="403">Indicates that you did not use an API key in the header X-ApiKey or that the key did not match what was configured in your appsettings</response>
-        [HttpPost]
-        public void Post([FromBody] Beer beer)
+        [HttpPost("api/{apikey}/[controller]")]
+        public void Post(string apikey, [FromBody] Beer beer)
         {
-            if (IsAuthenticated())
-            {
-                _brewDb.AddBeer(beer);
-            }
-            else
-            {
-                Response.StatusCode = 403;
-            }
+            if (!_configuration.GetValue(typeof(string), "ApiKey").ToString().Equals(apikey)) Response.StatusCode = 403;
+            _brewDb.AddBeer(beer);
         }
 
         // PUT: api/Beer/5
@@ -98,17 +78,11 @@ namespace AutoBeer.Api
         /// <remarks>Measurements is optional</remarks>
         /// <response code="200">All good</response>
         /// <response code="403">Indicates that you did not use an API key in the header X-ApiKey or that the key did not match what was configured in your appsettings</response>
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Beer beer)
+        [HttpPut("api/{apikey}/[controller]/{id}")]
+        public void Put(string apikey, int id, [FromBody] Beer beer)
         {
-            if (IsAuthenticated())
-            {
-                _brewDb.UpdateBeer(id, beer);
-            }
-            else
-            {
-                Response.StatusCode = 403;
-            }
+            if (!_configuration.GetValue(typeof(string), "ApiKey").ToString().Equals(apikey)) Response.StatusCode = 403;
+            _brewDb.UpdateBeer(id, beer);
         }
 
         // DELETE: api/ApiWithActions/5
@@ -118,17 +92,11 @@ namespace AutoBeer.Api
         /// <param name="id">The id of the beer to delete</param>
         /// <response code="200">All good</response>
         /// <response code="403">Indicates that you did not use an API key in the header X-ApiKey or that the key did not match what was configured in your appsettings</response>
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("api/{apikey}/[controller]/{id}")]
+        public void Delete(string apikey, int id)
         {
-            if (IsAuthenticated())
-            {
-                _brewDb.DeleteBeer(id);
-            }
-            else
-            {
-                Response.StatusCode = 403;
-            }
+            if (!_configuration.GetValue(typeof(string), "ApiKey").ToString().Equals(apikey)) Response.StatusCode = 403;
+            _brewDb.DeleteBeer(id);
         }
     }
 }

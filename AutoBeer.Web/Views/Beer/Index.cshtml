@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    These beers may or may not be in the cellar!
 </p>
 <table class="table">
     <thead>
@@ -72,9 +72,9 @@
                 @item.RemainingBottles bottles remaining.
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                <!-- @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |-->
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                <!--@Html.ActionLink("Delete", "Delete", new { id=item.Id })-->
             </td>
         </tr>
 }

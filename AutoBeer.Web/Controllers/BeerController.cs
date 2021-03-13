@@ -14,12 +14,16 @@ namespace AutoBeer.Web.Controllers
         {
             _brewDb = db;
         }
+
+        [Route("/Beer")]
+        [Route("/Beer/Index")]
         public IActionResult Index()
         {
             var model = _brewDb.GetAllBeers();
             return View(model);
         }
 
+        [Route("/Beer/{id}")]
         public IActionResult Details(int id)
         {
             var model = _brewDb.GetBeer(id);

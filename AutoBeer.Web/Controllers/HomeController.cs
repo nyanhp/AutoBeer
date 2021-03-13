@@ -18,12 +18,16 @@ namespace AutoBeer.Controllers
             _brewDb = db;
         }
 
+        [Route("/")]
+        [Route("/Home")]
+        [Route("/Home/Index")]
         public IActionResult Index()
         {
             var model = _brewDb.GetAllBeers();
             return View(model);
         }
 
+        [Route("/Privacy")]
         public IActionResult Privacy()
         {
             return View();
